@@ -13,81 +13,94 @@
       <div class="lg:pl-[54px] lg:pr-[63px] md:px-10 px-5 pt-[36px] w-full">
         <FindingsReport />
       </div>
-      <div class="main-div m-12 pb-2">
+
+      <!-- findings table  -->
+      <div class="bg-white m-12 pb-2">
         <div
-          class="lg:pl-[54px] lg:pr-[63px] md:px-10 px-5 pt-[36px] w-full flex items-center justify-between border-b-2"
+          class="lg:pl-[54px] lg:pr-[63px] md:px-10 px-5 pt-[36px] w-full flex items-center justify-end pb-6 border-b-2"
         >
-          <CommonCustomHeading
-            id="repositories"
-            :icon="github"
-            title="Repositories"
-          />
           <div class="flex items-center">
-            <div class="me-2 font-medium">Upload Scan</div>
-            <div
-              style="cursor: pointer"
-              class="font-bold bg-primary circle text-white px-1 relative rounded-full"
-            >
-              <button @click="showModal = true">+</button>
-              <!-- Modal -->
-              <div v-if="showModal" class="fixed z-10 inset-0 overflow-y-auto">
-                <div class="flex items-center justify-center min-h-screen">
-                  <!-- Background overlay -->
-                  <div class="fixed inset-0 bg-gray-500 opacity-75"></div>
-
-                  <!-- Modal content -->
-                  <div
-                    class="flex-col bg-white text-black rounded-lg relative px-8 py-2"
-                  >
-                    <div
-                      class="flex items-center justify-between gap-24 border-b"
-                    >
-                      <h1 class="text-xl font-bold border-gray-300 primary-color">
-                        Upload Scan
-                      </h1>
-
-                      <!-- Close button -->
-                      <button
-                        @click="closeModal"
-                        class="text-gray-600 hover:text-gray-900 mt-1"
-                      >
-                        <svg
-                          class="h-6 w-6"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12"
-                          ></path>
-                        </svg>
-                      </button>
-                    </div>
-
-                    <div
-                      class="flex items-center justify-between gap-4 my-4 text-black"
-                    >
-                      <input class="" type="radio" />
-                      <h1>Select Repository</h1>
-                      <select
-                        class="px-24 rounded border-2"
-                        name=""
-                        id=""
-                      ></select>
-                    </div>
-                    <div class="flex justify-end">
-                      <button
-                        class="bg-primary rounded-sm px-4 py-0 text-white"
-                      >
-                        Upload
-                      </button>
-                    </div>
-                  </div>
-                </div>
+            <div class="me-2 text-black font-medium">Upload Scan</div>
+            <div>
+              <div
+                @click="isOpen = true"
+                style="cursor: pointer"
+                class="font-bold bg-[#8220ff] rounded-full circle text-whie relative"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  class="w-5 h-5"
+                >
+                  <path
+                    d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z"
+                  />
+                </svg>
               </div>
+
+              <UModal class="bg-white" v-model="isOpen" prevent-close>
+                <UCard
+                  :ui="{
+                    ring: '',
+                    divide:
+                      'divide-y bg-white divide-gray-100 dark:divide-gray-800',
+                  }"
+                  class="bg-white"
+                >
+                  <template #header>
+                    <div class="flex items-center justify-between">
+                      <h3
+                        class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
+                      >
+                        Upload Scan
+                      </h3>
+                      <UButton
+                        color="indigo"
+                        variant="ghost"
+                        icon="i-heroicons-x-mark-20-solid"
+                        class="-my-1"
+                        @click="isOpen = false"
+                      />
+                    </div>
+                  </template>
+                  <div
+                    class="flex items-center justify-between my-4 text-white b"
+                  >
+                    <div class="flex items-center gap-4">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="w-6 h-6 text-[#8220ff]"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm6-2.438c0-.724.588-1.312 1.313-1.312h4.874c.725 0 1.313.588 1.313 1.313v4.874c0 .725-.588 1.313-1.313 1.313H9.564a1.312 1.312 0 0 1-1.313-1.313V9.564Z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+
+                      <h1>Select Repository</h1>
+                    </div>
+                    <USelect
+                      class="text-black"
+                      size="xl"
+                      color="violet"
+                      variant="outline"
+                      :options="['United States', 'Canada', 'Mexico']"
+                    />
+                  </div>
+                  <div class="flex justify-end pt-6">
+                    <button
+                      class="bg-[#8220ff] rounded-md px-4 py-0 text-white"
+                    >
+                      Upload
+                    </button>
+                  </div>
+                  <Placeholder class="h-32" />
+                </UCard>
+              </UModal>
             </div>
           </div>
         </div>
@@ -96,22 +109,79 @@
           class="flex justify-between lg:w-full gap-4 items-center px-12 pt-8"
         >
           <div class="flex items-center justify-start gap-8 relative">
-            <div class="filter-button p-2">filter</div>
+            <div
+              class="flex items-center bg-[#8220ff] p-1 rounded-sm hover:bg-indigo-600 cursor-pointer"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="w-6 h-6 me-2"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3.792 2.938A49.069 49.069 0 0 1 12 2.25c2.797 0 5.54.236 8.209.688a1.857 1.857 0 0 1 1.541 1.836v1.044a3 3 0 0 1-.879 2.121l-6.182 6.182a1.5 1.5 0 0 0-.439 1.061v2.927a3 3 0 0 1-1.658 2.684l-1.757.878A.75.75 0 0 1 9.75 21v-5.818a1.5 1.5 0 0 0-.44-1.06L3.13 7.938a3 3 0 0 1-.879-2.121V4.774c0-.897.64-1.683 1.542-1.836Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+
+              filter
+            </div>
             <div>
-              <!-- Search input -->
-              <input
-                placeholder="Search..."
-                class="border border-gray-300 rounded-full px-4 py-2 mb-2 focus:outline-none focus:border-blue-500"
-              />
+              <div @click="showModal = true">
+                <UInput
+                  v-model="q"
+                  name="q"
+                  class="text-black"
+                  color="indigo"
+                  placeholder="Search..."
+                  icon="i-heroicons-magnifying-glass-20-solid"
+                  autocomplete="off"
+                  :ui="{ icon: { trailing: { pointer: '' } } }"
+                >
+                  <template #trailing>
+                    <UButton
+                      class="cursor-pointer"
+                      v-show="q !== ''"
+                      color="indigo"
+                      variant="link"
+                      icon="i-heroicons-x-mark-20-solid"
+                      :padded="false"
+                      @click="q = ''"
+                    />
+                  </template>
+                </UInput>
+              </div>
+              <!-- </UDropdown> -->
 
               <!-- Search Modal -->
               <div
-                class="absolute top-full bg-gray-50 shadow-2xl rounded-sm p-4"
+                v-if="showModal"
+                class="absolute top-full bg-gray-50 shadow-2xl rounded-sm p-4 mt-[1%]"
               >
                 <div
-                  class="primary-color font-bold uppercase text-sm border-b border-gray-300 pb-2"
+                  class="flex items-center justify-between text-[#8220ff] font-bold uppercase text-sm border-b border-gray-300 pb-2"
                 >
-                  search Filters
+                  <div>search Filters</div>
+                  <!-- Close button -->
+                  <button
+                    @click="closeModal"
+                    class="text-gray-600 hover:text-gray-900 mt-1"
+                  >
+                    <svg
+                      class="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      ></path>
+                    </svg>
+                  </button>
                 </div>
                 <ul>
                   <li class="py-2">
@@ -123,44 +193,57 @@
                   <li class="flex items-center justify-between py-2">
                     <input class="me-2" type="radio" />
                     <div class="text-black font-bold">Repository</div>
-                    <div class="text-black font-bold ms-2">ID</div>
-                    <select
-                      class="border border-1 px-8 rounded ms-4"
-                      name=""
-                      id=""
-                    ></select>
-                    <select
-                      class="border border-1 px-8 rounded ms-4"
-                      name=""
-                      id=""
-                    ></select>
+                    <div class="text-black font-bold mx-2">ID</div>
+                    <div class="flex items-center justify-between gap-2">
+                      <USelect
+                        class="text-black"
+                        size="2xs"
+                        color="violet"
+                        variant="outline"
+                        :options="['United States', 'Canada', 'Mexico']"
+                      />
+                      <USelect
+                        size="2xs"
+                        color="violet"
+                        variant="outline"
+                        :options="['United States', 'Canada', 'Mexico']"
+                      />
+                    </div>
+
                     <div class="ms-4 font-bold text-gray-500">X</div>
                   </li>
                   <li class="flex items-center justify-between py-2">
-                    <div class="text-black font-bold">
-                      <input class="me-2" type="radio" />
-                      <span>Source</span> <span>Control</span>
+                    <input class="me-2" type="radio" />
+                    <div class="text-black font-bold me-2">
+                      <span>Source</span>
+                    </div>
+                    <div class="text-black font-bold me-2">
+                      <span>Control</span>
                     </div>
                     <div class="flex items-center">
-                      <select
-                        class="border border-1 px-20 rounded"
-                        name=""
-                        id=""
-                      ></select>
+                      <USelect
+                        class="text-black ms-2"
+                        size="2xs"
+                        color="violet"
+                        variant="outline"
+                        :options="['United States', 'Canada', 'Mexico']"
+                      />
                       <div class="ms-4 font-bold text-gray-500">X</div>
                     </div>
                   </li>
                   <li class="flex items-center justify-between py-2">
-                    <div class="text-black font-bold">
-                      <input class="me-2" type="radio" />
+                    <input class="me-2" type="radio" />
+                    <div class="text-black font-bold me-2">
                       <span>Tags</span>
                     </div>
                     <div class="flex items-center">
-                      <select
-                        class="border border-1 px-20 rounded"
-                        name=""
-                        id=""
-                      ></select>
+                      <USelect
+                        class="text-black ms-2"
+                        size="2xs"
+                        color="violet"
+                        variant="outline"
+                        :options="['United States', 'Canada', 'Mexico']"
+                      />
                       <div class="ms-4 font-bold text-gray-500">X</div>
                     </div>
                   </li>
@@ -168,24 +251,48 @@
                     class="flex items-center justify-start py-2 pb-4 border-b border-1"
                   >
                     <div class="text-black font-bold">+</div>
-                    <div class="flex items-center ms-1">Add</div>
+                    <div class="flex items-center text-black font-bold ms-1">
+                      Add
+                    </div>
                   </li>
                 </ul>
-                <div class="primary-color font-bold uppercase text-sm py-2">
+                <div class="text-[#8220ff] font-bold uppercase text-sm py-2">
                   clear Filters
                 </div>
               </div>
             </div>
           </div>
           <div class="flex items-center justify-start gap-8">
-            <div class="download-btn p-1">Download</div>
-            <div style="color: #8220ff">REFRESH</div>
+            <div
+              class="bg-[#8220ff] p-1 rounded-sm hover:bg-indigo-600 cursor-pointer"
+            >
+              Download
+            </div>
+            <div class="flex items-center">
+              <div class="text-[#8220ff]">REFRESH</div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6 text-[#8220ff] ms-2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
+                />
+              </svg>
+            </div>
           </div>
         </div>
 
         <!-- Repositori table  -->
-        <div class="responsive-table mt-8">
-          <table>
+        <div class="overflow-x-auto mt-8">
+          <table
+            class="w-full md:w-min(100% - 30) md:w-1430 mx-auto border-collapse"
+          >
             <thead>
               <tr>
                 <th v-for="header in headers" :key="header">{{ header }}</th>
@@ -196,7 +303,7 @@
               <tr class="font-medium" v-for="(row, index) in data" :key="index">
                 <td>
                   <button
-                    class="flex items-center gap-0"
+                    class="flex items-center text-black gap-0"
                     v-for="tag in row.id.split(',')"
                   >
                     {{ tag }}
@@ -204,7 +311,7 @@
                 </td>
                 <td>
                   <button
-                    class="flex items-center gap-0"
+                    class="flex items-center text-black gap-0"
                     v-for="tag in row.source.split(',')"
                   >
                     {{ tag }}
@@ -212,16 +319,20 @@
                 </td>
                 <td>
                   <button
-                    class="flex items-center gap-0"
+                    class="flex items-center text-black gap-0"
                     v-for="tag in row.repo.split(',')"
                   >
                     {{ tag }}
                   </button>
                 </td>
                 <td>
-                  <div class="flex items-center">
-                    <div class="priority-one px-[28px] z-0"></div>
-                    <div class="priority-two px-[16px] -ms-2"></div>
+                  <div class="flex text-black items-center">
+                    <div
+                      class="bg-[#03ad3c] rounded-xl h-2 px-[28px] z-40"
+                    ></div>
+                    <div
+                      class="bg-[#d6d6d6] rounded-xl h-2 px-[16px] -ms-2 z-30"
+                    ></div>
                     <div
                       class="ms-4"
                       v-for="priority in row.priority.split(',')"
@@ -233,27 +344,48 @@
                 <td>
                   <button class="flex items-center">
                     <div
-                      class="tags-btn z-0 px-[10px]"
+                      class="bg-[#f7931a] text-white border-none rounded-lg cursor-pointer transition duration-300 text-sm z-40 px-[10px]"
                       v-for="tag in row.tags.split(',')"
                     >
                       {{ tag }}
                     </div>
-                    <div class="tags-plus px-[12px] -ms-4">
-                      <span class="text-end font-bold ps-2">+</span>
+                    <div class="flex items-center z-30 bg-orange-200">
+                      <UDropdown
+                        :items="tagItems"
+                        :popper="{ arrow: true }"
+                        class="hover:bg-white bg-white"
+                      >
+                        <ul>
+                          <div
+                            class="bg-orange-200 text-black border-none rounded-full cursor-pointer transition duration-300 text-sm px-[12px] -ms-4"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              class="w-5 h-5 ps-2 font-bold"
+                            >
+                              <path
+                                d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z"
+                              />
+                            </svg>
+                          </div>
+                        </ul>
+                      </UDropdown>
                     </div>
                   </button>
                 </td>
                 <td>
                   <button
-                    class="flex items-center gap-0"
-                    v-for="tag in row.branch.split(',')"
+                    class="flex items-center text-black gap-0"
+                    v-for="branch in row.branch.split(',')"
                   >
-                    {{ tag }}
+                    {{ branch }}
                   </button>
                 </td>
                 <td>
                   <button
-                    class="flex items-center view-btn px-[12px] font-medium"
+                    class="flex items-center bg-[#e0defc] hover:bg-blue-300 text-black border-none rounded-lg cursor-pointer transition duration-300 text-sm px-[12px] font-medium"
                     v-for="tag in row.tags.split(',')"
                   >
                     View
@@ -266,16 +398,22 @@
                   </button>
                 </td>
               </tr>
-              <div
-                class="flex-col list-disc ps-2 justify-start absolute w-[120px] right-0 bg-orange-400 shadow-2xl text-white rounded-md py-2 border me-[24rem]"
-              >
-                <li>Financial</li>
-                <li>Insurance</li>
-                <li>Energy</li>
-              </div>
             </tbody>
           </table>
-          <CommonPagination :data="paginatedData" />
+          <div class="flex flex-wrap justify-between items-center">
+            <div>
+              <span class="text-sm leading-5">
+                Showing
+                <span class="font-medium">{{ "1" }}</span>
+                to
+                <span class="font-medium">{{ "4" }}</span>
+                of
+                <span class="font-medium">{{ "08" }}</span>
+                results
+              </span>
+            </div>
+          </div>
+          <CommonPagination class="text-black" :data="paginatedData" />
         </div>
       </div>
 
@@ -291,9 +429,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import type SideBar from "~/components/SideBar.vue";
-import github from "../../public/assets/Icons/git_hub.svg";
 import CustomDropdown from "../components/common/CustomDropdown.vue";
 
 const showModal = ref(false);
@@ -306,6 +443,8 @@ const closeModal = () => {
 
 // Define reactive variable for sidebar visibility
 const sidebarVisible = ref(false);
+const q = ref("");
+const isOpen = ref(false);
 
 defineProps({
   icon: Array,
@@ -352,6 +491,20 @@ const data = ref([
   },
 ]);
 
+const tagItems = [
+  [
+    {
+      label: "Financial",
+    },
+    {
+      label: "Insurance",
+    },
+    {
+      label: "Energy",
+    },
+  ],
+];
+
 // for pagination
 const currentPage = ref(1);
 const pageSize = 5;
@@ -361,7 +514,6 @@ const paginatedData = computed(() => {
   return data.value.slice(startIndex, endIndex);
 });
 
-const isOpen = ref(false);
 watch(isOpen, (isOpen) => {
   if (isOpen) {
     document.body.classList.add("overflow-y-hidden");
@@ -386,14 +538,6 @@ const headers = ref([
 </script>
 
 <style scoped>
-.responsive-table {
-  overflow-x: auto;
-  max-width: 100%;
-  margin-left: 3rem;
-  margin-right: 3rem;
-  margin-bottom: 30%;
-}
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -408,103 +552,5 @@ td {
 
 th {
   background-color: #d0cef0;
-}
-
-.main-div {
-  background-color: #fff;
-}
-
-.download-btn {
-  background-color: #8220ff;
-  border-radius: 4px;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.download-btn:hover {
-  background-color: #0056b3;
-}
-
-.filter-button {
-  background-color: #8220ff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.filter-button:hover {
-  background-color: #0056b3;
-}
-
-.tags-btn {
-  background-color: #f7931a;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  font-size: small;
-}
-
-.tags-plus {
-  background-color: #f7d4b8;
-  color: black;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  font-size: small;
-}
-
-.view-btn {
-  background-color: #e0defc;
-  color: black;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  font-size: small;
-}
-.priority-one {
-  background-color: #03ad3c;
-  border-radius: 100px;
-  height: 8px;
-}
-.priority-two {
-  background-color: #d6d6d6;
-  border-radius: 100px;
-  height: 8px;
-}
-.primary-color {
-  color: #8220ff;
-}
-.bg-primary {
-  background-color: #8220ff;
-  /* border-radius: 100%; */
-}
-button.close-modal {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 1rem;
-  color: #4a5568;
-}
-
-/* Center the modal vertically and horizontally */
-.modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Style for the modal content */
-.modal-content {
-  background-color: #fff;
-  border-radius: 0.5rem;
-  padding: 2rem;
-  max-width: 30rem;
 }
 </style>
